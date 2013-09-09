@@ -19,7 +19,7 @@ namespace StringParser
             ParseEnd   = 1,
             ParseString = 3,
         };
-        private List<string> cmd = new List<string>();
+        private List<string> list = new List<string>();
         private string cmdString;
         private string inString;
 
@@ -37,8 +37,8 @@ namespace StringParser
             bool pend = false;
             int pos = 0;
             int length = str.Length;
-            string tmp = "";
-            string cmd = "";
+            StringBuilder tmp = new StringBuilder();
+            StringBuilder cmd = new StringBuilder();
             ParseCmd pCmd = ParseCmd.ParseString;
 
 
@@ -62,13 +62,13 @@ namespace StringParser
                         switch (pCmd)
                         {
                             case ParseCmd.ParseStart:
-                                cmd += c;
+                                cmd.Append(c);
                                 break;
                             case ParseCmd.ParseEnd:
-                                tmp += ParseCmd(cmd);
+                                tmp.Append(ParseCmd(cmd));
                                 break;
                             case ParseCmd.ParseString:
-                                tmp += c;
+                                tmp.Append(c);
                                 break;
                         }
                         break;
